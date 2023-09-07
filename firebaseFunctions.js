@@ -1,5 +1,6 @@
 import { auth, firestore } from './firebase'; // Update the path to your firebase.js file
-import { collection, addDoc, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
+import { collection, addDoc, query, where, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+
 
 const firebaseCreateTask = async (taskTitle, taskDescription, deadline, storyPoint) => {
   try {
@@ -73,4 +74,22 @@ const firebaseEditTask = async (editedTask) => {
   }
 };
 
-export { firebaseCreateTask, firebaseFetchTask, firebaseEditTask };
+
+const firebaseDeleteTask = async (taskId) => {
+  try {
+    // Define the path to the task document in the Firestore collection
+    const taskRef = doc(firestore, 'tasks', taskId);
+
+    // Delete the task document
+    await deleteDoc(taskRef);
+
+    // Task deleted successfully
+    console.log('Task deleted successfully');
+    return true;
+  } catch (error) {
+    console.error('Error deleting task: ', error);
+    return false;
+  }
+};
+
+export { firebaseCreateTask, firebaseFetchTask, firebaseEditTask, firebaseDeleteTask };

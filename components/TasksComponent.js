@@ -25,7 +25,6 @@ export default TasksComponent = () => {
 
     const handleTaskPress = (task) => {
         setSelectedTask(task);
-        console.log(task);
         setIsTaskDetailsVisible(true);
     };
 

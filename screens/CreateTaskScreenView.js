@@ -131,8 +131,12 @@ export default function CreateTaskScreenView() {
             value={storyPoint}
             onChangeText={(text) => setStoryPoint(text)}
           />
-          <TouchableOpacity style={styles.button} onPress={handleCreateTask}>
+          <TouchableOpacity style={[styles.button, { backgroundColor: 'green' }]} onPress={handleCreateTask}>
             <Text style={styles.buttonText}>Create Task</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={[styles.button, { backgroundColor: 'grey' }]} onPress={() => navigation.goBack()}>
+            <Text style={styles.buttonText}>Cancel </Text>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
@@ -175,10 +179,11 @@ const styles = StyleSheet.create({
     height: 300,
   },
   button: {
-    backgroundColor: 'green',
+
     padding: 12,
     borderRadius: 4,
     alignItems: 'center',
+    marginBottom: 10,
   },
   buttonText: {
     color: '#FFFFFF',

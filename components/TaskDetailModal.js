@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, StyleSheet, Text, TouchableOpacity, View, TextInput } from 'react-native';
 import NonEditableTaskDetail from "./NonEditableTaskDetail";
 import EditableTaskDetail from "./EditableTaskDetail";
-import { firebaseEditTask } from '../firebaseFunctions';
+import { firebaseEditTask, firebaseDeleteTask } from '../firebaseFunctions';
 
-const TaskDetailModal = ({ task, visible, onClose, onDelete, onEdit, taskList }) => {
+const TaskDetailModal = ({ task, visible, onClose, onEdit, taskList }) => {
     const [editedTask, setEditedTask] = useState({ ...task });
     const [isEditing, setIsEditing] = useState(false);
 
+    useEffect(() => {
+        // Update the editedTask state when the task prop changes
+        setEditedTask({ ...task });
+    }, [task]);
 
     const handleSaveChanges = () => {
         setIsEditing(false);
@@ -28,6 +32,20 @@ const TaskDetailModal = ({ task, visible, onClose, onDelete, onEdit, taskList })
             })
             .catch((error) => {
                 console.error('Error editing task: ', error);
+            });
+    };
+
+    const handleDeleteTask = () => {
+        // Use Firebase to delete the task by its ID
+        firebaseDeleteTask(editedTask.id)
+            .then(() => {
+                // Remove the deleted task from the task list
+                const updatedTasks = taskList.filter((taskItem) => taskItem.id !== editedTask.id);
+                onEdit(updatedTasks);
+                onClose(); // Close the modal after deletion
+            })
+            .catch((error) => {
+                console.error('Error deleting task: ', error);
             });
     };
 
@@ -56,7 +74,7 @@ const TaskDetailModal = ({ task, visible, onClose, onDelete, onEdit, taskList })
                         <NonEditableTaskDetail
                             task={editedTask}
                             setIsEditing={setIsEditing}
-                            onDelete={onDelete}
+                            handleDeleteTask={handleDeleteTask}
                         />
                     )}
                 </View>

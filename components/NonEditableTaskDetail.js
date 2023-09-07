@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, StyleSheet, Text, TouchableOpacity, View, TextInput } from 'react-native';
 
 
-const NonEditableTaskDetail = ({ task, setIsEditing, onDelete }) => {
+const NonEditableTaskDetail = ({ task, setIsEditing, handleDeleteTask }) => {
     return (
         <View style={styles.modalDetails}>
             <Text style={styles.modalText}>Storypoint: {task.storyPoint}</Text>
@@ -12,7 +12,7 @@ const NonEditableTaskDetail = ({ task, setIsEditing, onDelete }) => {
 
                 <TouchableOpacity
                     style={styles.deleteButton}
-                    onPress={onDelete}
+                    onPress={handleDeleteTask}
                 >
                     <Text style={styles.deleteButtonText}>Delete</Text>
                 </TouchableOpacity>
