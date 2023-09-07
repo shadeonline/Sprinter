@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/core';
 import { ScrollView, TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { firebaseFetchTask } from '../firebaseFunctions';
-import TaskCard from './TaskCard';
+import TaskCard from '../components/TaskCard';
 
 export default TasksComponent = () => {
     const navigation = useNavigation();

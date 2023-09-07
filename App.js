@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { LogBox } from 'react-native';
 
 import LoginScreenView from './screens/LoginScreenView';
 import RegisterScreenView from './screens/RegisterScreenView';
@@ -11,10 +11,13 @@ import HomeScreenView from './screens/HomeScreenView';
 import CreateTaskScreenView from './screens/CreateTaskScreenView';
 import TaskDetailScreenView from './screens/TaskDetailScreenView';
 
+
+LogBox.ignoreLogs(['Sending `onAnimatedValueUpdate` with no listeners registered.']);
+
 const Stack = createStackNavigator();
-const ModalStack = createNativeStackNavigator();
 
 const App = () => {
+
   return (
     <NavigationContainer>
       <Stack.Navigator>

@@ -11,6 +11,7 @@ const firebaseCreateTask = async (taskTitle, taskDescription, deadline, storyPoi
       taskTitle,
       deadline,
       storyPoint,
+      status: '-'
     };
 
     // Add the task to the "tasks" collection in Firebase
@@ -34,13 +35,8 @@ const firebaseFetchTask = async () => {
     const taskList = [];
     querySnapshot.forEach((doc) => {
       const data = doc.data();
-      taskList.push({
-        id: doc.id,
-        taskTitle: data.taskTitle,
-        taskDescription: data.taskDescription,
-        storyPoint: data.storyPoint,
-        deadline: data.deadline,
-      });
+      data.id = doc.id; // Assign the ID to data.id
+      taskList.push(data);
     });
     return taskList;
   } catch (error) {
@@ -51,19 +47,20 @@ const firebaseFetchTask = async () => {
 
 
 
+
 const firebaseEditTask = async (editedTask) => {
   try {
     // Define the path to the task document in the Firestore collection
     const taskRef = doc(firestore, 'tasks', editedTask.id);
     // Create an object with the fields to update
-    const updatedFields = {
-      taskTitle: editedTask.taskTitle,
-      taskDescription: editedTask.taskDescription,
-      storyPoint: editedTask.storyPoint,
-      deadline: editedTask.deadline,
-    };
+    // const updatedFields = {
+    //   taskTitle: editedTask.taskTitle,
+    //   taskDescription: editedTask.taskDescription,
+    //   storyPoint: editedTask.storyPoint,
+    //   deadline: editedTask.deadline,
+    // };
     // Update the task document with the new data
-    await updateDoc(taskRef, updatedFields);
+    await updateDoc(taskRef, editedTask);
 
     // Task updated successfully
     console.log('Task updated successfully');

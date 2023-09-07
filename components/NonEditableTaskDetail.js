@@ -1,12 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, StyleSheet, Text, TouchableOpacity, View, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import Icon from 'react-native-vector-icons/Ionicons'; // You can choose any icon library you prefer
+import SelectDropdown from 'react-native-select-dropdown'
+import { firebaseEditTask } from "../firebaseFunctions";
 
 const NonEditableTaskDetail = ({ task, setIsEditing, handleDeleteTask }) => {
     const navigation = useNavigation();
+
+    const [editedTask, setEditedTask] = useState(task);
+
+
+    const handleStatusChange = (selectedStatus) => {
+        // Update the editedTask state with the new status
+        setEditedTask((prevEditedTask) => ({
+            ...prevEditedTask,
+            status: selectedStatus,
+        }));
+    }
+
+    useEffect(() => {
+        // This effect will run whenever editedTask changes
+        // Check if the status has changed and then update it in Firebase
+        if (editedTask.status !== task.status) {
+            // Call the function to edit the task in Firebase
+            firebaseEditTask(editedTask)
+                .then((success) => {
+                    if (success) {
+                        console.log("Task edited successfully");
+                    } else {
+                        console.log("Error editing task");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error editing task:", error);
+                });
+        }
+    }, [editedTask]);
+
+
+    // console.log(task.status);
     return (
         <View style={styles.modalDetails}>
+
             {/* Add icons for Edit and Delete buttons */}
             <View style={styles.iconContainer}>
                 <TouchableOpacity onPress={() => setIsEditing(true)}>
@@ -16,6 +52,19 @@ const NonEditableTaskDetail = ({ task, setIsEditing, handleDeleteTask }) => {
                     <Icon name="trash-outline" size={24} color="#DD2C00" style={styles.icon} />
                 </TouchableOpacity>
             </View>
+            <Text style={styles.modalLabel}>Status:</Text>
+
+
+            <SelectDropdown
+                defaultValue={task.status}
+                data={["-", "In Progress", "Completed"]}
+                onSelect={(selectedStatus) => {
+                    handleStatusChange(selectedStatus)
+                }}
+                buttonStyle = {styles.selectButton}
+                buttonTextStyle ={styles.selectButtonText}
+                
+            />
             <Text style={styles.modalLabel}>Storypoint:</Text>
             <Text style={styles.modalText}>{task.storyPoint}</Text>
             <Text style={styles.modalLabel}>Description:</Text>
@@ -72,6 +121,31 @@ const styles = StyleSheet.create({
     buttonText: {
         color: 'white',
         fontWeight: 'bold',
+    },
+
+    selectButton: {
+        padding: 12,
+        alignItems: 'center',
+        backgroundColor: 'grey',
+        marginBottom: 16,
+        width: '30%',
+        height: '10%'
+    },
+    selectButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 13,
+    },
+
+    statusDropdownContainer: {
+        marginBottom: 16,
+        borderColor: '#949396',
+        borderWidth: 1,
+        borderRadius: 4,
+    },
+    statusDropdown: {
+        height: 40,
+        width: '100%',
     },
 });
 

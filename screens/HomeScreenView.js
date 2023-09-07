@@ -5,9 +5,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useFocusEffect } from '@react-navigation/native';
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 
-import SettingsComponent from '../components/SettingsComponent';
-import SprintComponent from '../components/SprintComponent';
-import TasksComponent from '../components/TasksComponent';
+import SettingsComponent from './SettingsTabView';
+import SprintComponent from './SprintTabView';
+import TasksComponent from './TasksTabView';
 import CreateTaskButton from '../components/CreateTaskButton';
 
 const Tab = createBottomTabNavigator();
