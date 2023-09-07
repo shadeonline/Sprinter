@@ -4,13 +4,11 @@ import { ScrollView, TouchableOpacity, StyleSheet, Text, View } from 'react-nati
 import { useIsFocused } from '@react-navigation/native';
 import { firebaseFetchTask } from '../firebaseFunctions';
 import TaskCard from './TaskCard';
-import TaskDetailModal from "./TaskDetailModal";
 
 export default TasksComponent = () => {
+    const navigation = useNavigation();
     const isFocused = useIsFocused();
     const [tasks, setTasks] = useState([]);
-    const [selectedTask, setSelectedTask] = useState(null);
-    const [isTaskDetailsVisible, setIsTaskDetailsVisible] = useState(false);
 
     const fetchTasks = async () => {
         // Retreive data from firebase in a list format of
@@ -23,19 +21,10 @@ export default TasksComponent = () => {
         setTasks(taskList);
     };
 
-    const handleTaskPress = (task) => {
-        setSelectedTask(task);
-        setIsTaskDetailsVisible(true);
-    };
-
-    const handleCloseTaskDetails = () => {
-        setIsTaskDetailsVisible(false);
-    };
 
     useEffect(() => {
         // Call the fetchTasks function
         if (isFocused) {
-            console.log("Task");
             fetchTasks();
         }
     }, [isFocused]);
@@ -43,19 +32,12 @@ export default TasksComponent = () => {
     return (
         <ScrollView style={styles.background}>
             {tasks.map((task) => (
-                <TaskCard key={task.id} task={task} onPress={() => handleTaskPress(task)} />
-            ))}
-
-            {/* Render the TaskDetailsPopup when visible */}
-            {selectedTask && (
-                <TaskDetailModal
-                    task={selectedTask}
-                    visible={isTaskDetailsVisible}
-                    onClose={handleCloseTaskDetails}
-                    onEdit={setTasks}
-                    taskList={tasks}
+                <TaskCard
+                    key={task.id}
+                    task={task}
+                    onPress={() => navigation.navigate('Task Detail', { task })} // Pass a function reference
                 />
-            )}
+            ))}
         </ScrollView>
     );
 };

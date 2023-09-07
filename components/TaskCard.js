@@ -11,7 +11,7 @@ const TaskCard = ({ task, onPress }) => {
             <View style={styles.taskHeader}>
                 <Text style={styles.taskTitle}>{task.taskTitle}</Text>
                 <View style={styles.storyPointContainer}>
-                    <Text style={styles.storyPoint}>{task.storyPoint}</Text>
+                    <Text style={styles.storyPoint}>{task.storyPoint ? task.storyPoint : '-'}</Text>
                 </View>
             </View>
             <Text style={styles.deadline}>Deadline: {task.deadline}</Text>
