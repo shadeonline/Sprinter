@@ -10,6 +10,7 @@ import RegisterScreenView from './screens/RegisterScreenView';
 import HomeScreenView from './screens/HomeScreenView';
 import CreateTaskScreenView from './screens/CreateTaskScreenView';
 import TaskDetailScreenView from './screens/TaskDetailScreenView';
+import CreateSprintScreenView from './screens/CreateSprintScreenView';
 
 
 LogBox.ignoreLogs(['Sending `onAnimatedValueUpdate` with no listeners registered.']);
@@ -32,8 +33,16 @@ const App = () => {
             presentation: 'modal',
           }}
           component={CreateTaskScreenView}
-        >
-        </Stack.Screen>
+        />
+
+        <Stack.Screen
+          name="New Sprint"
+          options={{
+            headerShown: false,
+            presentation: 'modal',
+          }}
+          component={CreateSprintScreenView}
+        />
 
         <Stack.Screen
           name="Task Detail"
@@ -42,8 +51,8 @@ const App = () => {
             presentation: 'modal',
           }}
           component={TaskDetailScreenView}
-        >
-        </Stack.Screen>
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

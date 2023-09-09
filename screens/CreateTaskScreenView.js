@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import {
-  KeyboardAvoidingView,
-  StyleSheet,
-  Text,
-  TextInput,
-  ScrollView,
-  TouchableOpacity,
-  View,
-  Alert,
-} from 'react-native';
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, ScrollView, TouchableOpacity, View, Alert, } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { firebaseCreateTask } from '../firebaseFunctions';
 

@@ -1,5 +1,5 @@
 import { auth, firestore } from './firebase'; // Update the path to your firebase.js file
-import { collection, addDoc, query, where, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { collection, addDoc, query, where, getDocs,getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 
 
 const firebaseCreateTask = async (taskTitle, taskDescription, deadline, storyPoint) => {
@@ -11,7 +11,8 @@ const firebaseCreateTask = async (taskTitle, taskDescription, deadline, storyPoi
       taskTitle,
       deadline,
       storyPoint,
-      status: '-'
+      status: '-',
+      createdAt: new Date().toISOString(),
     };
 
     // Add the task to the "tasks" collection in Firebase
@@ -52,16 +53,7 @@ const firebaseEditTask = async (editedTask) => {
   try {
     // Define the path to the task document in the Firestore collection
     const taskRef = doc(firestore, 'tasks', editedTask.id);
-    // Create an object with the fields to update
-    // const updatedFields = {
-    //   taskTitle: editedTask.taskTitle,
-    //   taskDescription: editedTask.taskDescription,
-    //   storyPoint: editedTask.storyPoint,
-    //   deadline: editedTask.deadline,
-    // };
-    // Update the task document with the new data
     await updateDoc(taskRef, editedTask);
-
     // Task updated successfully
     console.log('Task updated successfully');
     return true;
@@ -89,4 +81,102 @@ const firebaseDeleteTask = async (taskId) => {
   }
 };
 
-export { firebaseCreateTask, firebaseFetchTask, firebaseEditTask, firebaseDeleteTask };
+
+const firebaseCreateSprint = async (sprintName, selectedTasks) => {
+  try {
+    // Create a sprint object
+    const sprint = {
+      userUid: auth.currentUser.uid, // Assuming you have the user's UID
+      sprintName,
+      tasks: selectedTasks,
+      createdAt: new Date().toISOString(),
+      status: 'Active'
+    };
+
+    // Add the sprint to the "sprints" collection in Firebase
+    const docRef = await addDoc(collection(firestore, 'sprints'), sprint);
+
+    // Successfully added the sprint, you can navigate back or perform any other action
+    console.log('Sprint added with ID: ', docRef.id);
+    return true;
+  } catch (error) {
+    console.error('Error adding sprint: ', error);
+    return false;
+  }
+};
+
+const firebaseFetchActiveSprint = async () => {
+  const userUid = auth.currentUser.uid;
+
+  const q = query(collection(firestore, 'sprints'), where('userUid', '==', userUid), where('status', '==', 'Active'));
+  try {
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.size === 0) {
+      // No active sprint found
+      return null;
+    }
+
+    // Assuming there's only one active sprint at a time
+    const sprintDoc = querySnapshot.docs[0];
+    const sprintData = sprintDoc.data();
+    sprintData.id = sprintDoc.id; // Assign the ID to sprintData.id
+    return sprintData;
+  } catch (error) {
+    console.error('Error fetching active sprint: ', error);
+    return null;
+  }
+};
+
+const firebaseFetchSprintTasks = async (taskIds) => {
+  try {
+    const tasks = [];
+
+    // Retrieve task documents based on taskIds
+    for (const taskId of taskIds) {
+      const taskDocRef = doc(firestore, 'tasks', taskId);
+      const taskDocSnapshot = await getDoc(taskDocRef);
+
+      if (taskDocSnapshot.exists()) {
+        const taskData = taskDocSnapshot.data();
+        taskData.id = taskId; // Assign the ID to taskData.id
+        tasks.push(taskData);
+      } else {
+        console.error(`Task with ID ${taskId} not found`);
+      }
+    }
+    return tasks;
+  } catch (error) {
+    console.error('Error fetching sprint tasks: ', error);
+    return [];
+  }
+};
+
+
+const firebaseCloseSprint = async (sprintId) => {
+  try {
+    // Define the path to the sprint document in the Firestore collection
+    const sprintRef = doc(firestore, 'sprints', sprintId);
+
+    // Update the status of the sprint to 'Inactive'
+    await updateDoc(sprintRef, { status: 'Inactive' });
+
+    // Sprint closed successfully
+    console.log('Sprint closed successfully');
+    return true;
+  } catch (error) {
+    console.error('Error closing sprint: ', error);
+    return false;
+  }
+};
+
+
+export {
+  firebaseCreateTask,
+  firebaseFetchTask,
+  firebaseEditTask,
+  firebaseDeleteTask,
+  firebaseCreateSprint,
+  firebaseFetchActiveSprint,
+  firebaseFetchSprintTasks,
+  firebaseCloseSprint
+};

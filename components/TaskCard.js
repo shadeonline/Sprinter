@@ -1,12 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
+
+const TaskCard = ({ task }) => {
+    const navigation = useNavigation();
+    // Function to determine border color based on task status
+    const getStatusBorderColor = (status) => {
+        switch (status) {
+            case 'In Progress':
+                return '#5386e4';
+            case 'Completed':
+                return 'green';
+            default:
+                return 'gray';
+        }
+    };
+
+    const taskContainerStyle = {
+        ...styles.taskContainer,
+        borderColor: getStatusBorderColor(task.status),
+        borderWidth: 3,
+    };
+
+    useEffect(() => {
+        getStatusBorderColor(task.status)
+      }, []);
 
 
-const TaskCard = ({ task, onPress }) => {
+
     return (
         <TouchableOpacity
-            style={styles.taskContainer}
-            onPress={onPress} // Use the onPress prop here
+            style={taskContainerStyle}
+            onPress={() => navigation.navigate('Task Detail', { task })} // Use the onPress prop here
         >
             <View style={styles.taskHeader}>
                 <Text style={styles.taskTitle}>{task.taskTitle}</Text>
@@ -26,6 +51,8 @@ const styles = StyleSheet.create({
         margin: 16,
         borderRadius: 8,
         elevation: 2,
+        width:'85%'
+        
     },
     taskHeader: {
         flexDirection: 'row',

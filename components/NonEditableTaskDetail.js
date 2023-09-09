@@ -126,9 +126,9 @@ const styles = StyleSheet.create({
     selectButton: {
         padding: 12,
         alignItems: 'center',
-        backgroundColor: 'grey',
+        backgroundColor: '#5386e4',
         marginBottom: 16,
-        width: '30%',
+        width: '40%',
         height: '10%'
     },
     selectButtonText: {

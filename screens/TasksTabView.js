@@ -3,12 +3,15 @@ import { useNavigation } from '@react-navigation/core';
 import { ScrollView, TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { firebaseFetchTask } from '../firebaseFunctions';
-import TaskCard from '../components/TaskCard';
+import TaskSection from '../components/TaskSection';
 
 export default TasksComponent = () => {
-    const navigation = useNavigation();
     const isFocused = useIsFocused();
     const [tasks, setTasks] = useState([]);
+
+    const [backlogTasks, setBacklogTasks] = useState([]);
+    const [inProgressTasks, setInProgressTasks] = useState([]);
+    const [completedTasks, setCompletedTasks] = useState([]);
 
     const fetchTasks = async () => {
         // Retreive data from firebase in a list format of
@@ -16,11 +19,19 @@ export default TasksComponent = () => {
         // taskTitle: data.taskTitle || '-',
         // taskDescription: data.taskDescription || '-',
         // storyPoint: data.storyPoint || '-',
-        // deadline: formattedDeadline}]
+        // deadline: dd/mm/yy
+        // status: -
+        // }]
         const taskList = await firebaseFetchTask();
         setTasks(taskList);
+        // Separate tasks based on progress
+        const backlog = taskList.filter((task) => task.status === '-');
+        const inProgress = taskList.filter((task) => task.status === 'In Progress');
+        const completed = taskList.filter((task) => task.status === 'Completed');
+        setBacklogTasks(backlog)
+        setInProgressTasks(inProgress);
+        setCompletedTasks(completed);
     };
-
 
     useEffect(() => {
         // Call the fetchTasks function
@@ -31,52 +42,23 @@ export default TasksComponent = () => {
 
     return (
         <ScrollView style={styles.background}>
-            {tasks.map((task) => (
-                <TaskCard
-                    key={task.id}
-                    task={task}
-                    onPress={() => navigation.navigate('Task Detail', { task })} // Pass a function reference
-                />
-            ))}
+            {inProgressTasks.length > 0 && (
+                <TaskSection title="In Progress" tasks={inProgressTasks} />
+            )}
+            {backlogTasks.length > 0 && (
+                <TaskSection title="Backlog" tasks={backlogTasks} />
+            )}
+            {completedTasks.length > 0 && (
+                <TaskSection title="Completed" tasks={completedTasks} />
+            )}
         </ScrollView>
     );
 };
 
+
 const styles = StyleSheet.create({
     background: {
         backgroundColor: '#4C4B63',
-    },
-    taskContainer: {
-        backgroundColor: 'white',
-        padding: 16,
-        margin: 16,
-        borderRadius: 8,
-        elevation: 2,
-    },
-    taskHeader: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 8,
-    },
-    taskTitle: {
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    storyPointContainer: {
-        fontSize: 14,
-        color: 'gray',
-        backgroundColor: '#DCE0E8',
-        paddingHorizontal: 20,
-        paddingVertical: 2,
-        borderRadius: 10,
-    },
-    storyPoint: {
-        fontSize: 14,
-        color: 'gray',
-    },
-    deadline: {
-        fontSize: 14,
-        color: 'gray',
+        paddingHorizontal: 16,
     },
 });

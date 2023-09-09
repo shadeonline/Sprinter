@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, KeyboardAvoidingView} from 'react-native';
 import NonEditableTaskDetail from "../components/NonEditableTaskDetail";
 import EditableTaskDetail from "../components/EditableTaskDetail";
 import { useNavigation } from '@react-navigation/core';
@@ -26,28 +26,31 @@ export default TaskDetailScreenView = ({ route }) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.headerText}>{editedTask.taskTitle}</Text>
-            </View>
-            <View style={styles.content}>
-                {isEditing ? (
-                    <EditableTaskDetail
-                        task={task}
-                        editedTask={editedTask}
-                        setEditedTask={setEditedTask}
-                        handleSaveChanges={handleSaveChanges}
-                        setIsEditing={setIsEditing}
-                    />
-                ) : (
-                    <NonEditableTaskDetail
-                        task={editedTask}
-                        setIsEditing={setIsEditing}
-                        handleDeleteTask={handleDeleteTask}
-                    />
-                )}
+            {/* <KeyboardAvoidingView style={styles.container} behavior="padding"> */}
+
+                <View style={styles.content}>
+                <View style={styles.header}>
+                    <Text style={styles.headerText}>{editedTask.taskTitle}</Text>
+                </View>
+                    {isEditing ? (
+                        <EditableTaskDetail
+                            task={task}
+                            editedTask={editedTask}
+                            setEditedTask={setEditedTask}
+                            handleSaveChanges={handleSaveChanges}
+                            setIsEditing={setIsEditing}
+                        />
+                    ) : (
+                        <NonEditableTaskDetail
+                            task={editedTask}
+                            setIsEditing={setIsEditing}
+                            handleDeleteTask={handleDeleteTask}
+                        />
+                    )}
 
 
-            </View>
+                </View>
+            {/* </KeyboardAvoidingView> */}
         </View>
     );
 };
@@ -55,22 +58,24 @@ export default TaskDetailScreenView = ({ route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#5386e4', 
+        backgroundColor: '#5386e4',
+        padding: 20,
+        backgroundColor: '#4c4b63',
     },
     header: {
-        backgroundColor: '#4c4b63', 
         padding: 16,
         alignItems: 'center',
     },
     headerText: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: 'white',
+        color: 'black',
     },
     content: {
         flex: 1,
         backgroundColor: 'white',
         padding: 16,
+        borderRadius: 5
     },
 
 });
