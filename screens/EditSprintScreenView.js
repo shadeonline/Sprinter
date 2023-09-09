@@ -105,6 +105,10 @@ export default function EditSprintScreenView({ route }) {
         <TouchableOpacity style={styles.editButton} onPress={handleEditSprint}>
           <Text style={styles.editButtonText}>Save Changes</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity style={styles.cancelButton} onPress={navigation.goBack}>
+          <Text style={styles.editButtonText}>Cancel</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -163,5 +167,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  cancelButton: {
+    backgroundColor: '#aba8b2',
+    padding: 12,
+    borderRadius: 4,
+    marginTop: 16,
   },
 });

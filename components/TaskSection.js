@@ -22,9 +22,15 @@ const TaskSection = ({ title, tasks }) => {
           )}
         </TouchableOpacity>
       </View>
-      {isExpanded && tasks.map((task) => (
-        <TaskCard key={task.id} task={task} />
-      ))}
+      {isExpanded ? (
+        tasks.length > 0 ? (
+          tasks.map((task) => (
+            <TaskCard key={task.id} task={task} />
+          ))
+        ) : (
+          <Text style={styles.noTasksText}>No tasks</Text>
+        )
+      ) : null}
     </View>
   );
 };
@@ -40,6 +46,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: 'white',
+  },
+  noTasksText: {
+    fontSize: 16,
+    color: 'white',
+    textAlign: 'center',
+    marginTop: 10,
   },
 });
 

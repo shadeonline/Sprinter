@@ -58,7 +58,6 @@ export default SprintComponent = () => {
         // Call the fetchSprint function
         if (isFocused) {
             fetchSprint();
-            console.log(sprintDetail);
         }
     }, [isFocused]);
 
@@ -169,6 +168,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     text: {
+        marginTop: '50%',
         color: 'white',
         fontSize: 15,
         padding: 15,

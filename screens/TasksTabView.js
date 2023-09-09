@@ -7,28 +7,21 @@ import TaskSection from '../components/TaskSection';
 
 export default TasksComponent = () => {
     const isFocused = useIsFocused();
+    const navigation = useNavigation();
     const [tasks, setTasks] = useState([]);
-
     const [backlogTasks, setBacklogTasks] = useState([]);
     const [inProgressTasks, setInProgressTasks] = useState([]);
     const [completedTasks, setCompletedTasks] = useState([]);
 
     const fetchTasks = async () => {
-        // Retreive data from firebase in a list format of
-        // [{id: doc.id,
-        // taskTitle: data.taskTitle || '-',
-        // taskDescription: data.taskDescription || '-',
-        // storyPoint: data.storyPoint || '-',
-        // deadline: dd/mm/yy
-        // status: -
-        // }]
         const taskList = await firebaseFetchTask();
         setTasks(taskList);
-        // Separate tasks based on progress
+
         const backlog = taskList.filter((task) => task.status === '-');
         const inProgress = taskList.filter((task) => task.status === 'In Progress');
         const completed = taskList.filter((task) => task.status === 'Completed');
-        setBacklogTasks(backlog)
+
+        setBacklogTasks(backlog);
         setInProgressTasks(inProgress);
         setCompletedTasks(completed);
     };
@@ -42,14 +35,30 @@ export default TasksComponent = () => {
 
     return (
         <ScrollView style={styles.background}>
-            {inProgressTasks.length > 0 && (
-                <TaskSection title="In Progress" tasks={inProgressTasks} />
-            )}
-            {backlogTasks.length > 0 && (
-                <TaskSection title="Backlog" tasks={backlogTasks} />
-            )}
-            {completedTasks.length > 0 && (
-                <TaskSection title="Completed" tasks={completedTasks} />
+            {(inProgressTasks.length > 0 || backlogTasks.length > 0 || completedTasks.length > 0) ? (
+                <>
+                    {inProgressTasks.length > 0 && (
+                        <TaskSection title="In Progress" tasks={inProgressTasks} />
+                    )}
+                    {backlogTasks.length > 0 && (
+                        <TaskSection title="Backlog" tasks={backlogTasks} />
+                    )}
+                    {completedTasks.length > 0 && (
+                        <TaskSection title="Completed" tasks={completedTasks} />
+                    )}
+                </>
+            ) : (
+                <View style={styles.emptyMessageContainer}>
+                    <Text style={styles.emptyMessageText}>
+                        Looking empty! Click on the button below to create a new task!
+                    </Text>
+                    <TouchableOpacity
+                        style={styles.createTaskButton}
+                        onPress={() => navigation.navigate('New Task')}
+                    >
+                        <Text style={styles.createTaskButtonText}>Create New Task</Text>
+                    </TouchableOpacity>
+                </View>
             )}
         </ScrollView>
     );
@@ -60,5 +69,26 @@ const styles = StyleSheet.create({
     background: {
         backgroundColor: '#4C4B63',
         paddingHorizontal: 16,
+    },
+    emptyMessageContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '50%',
+    },
+    emptyMessageText: {
+        color: 'white',
+        fontSize: 16,
+    },
+    createTaskButton: {
+        backgroundColor: '#0052CC',
+        padding: 16,
+        borderRadius: 40,
+        marginTop: 15,
+    },
+    createTaskButtonText: {
+        color: 'white',
+        fontSize: 15,
+        fontWeight: 'bold',
     },
 });
