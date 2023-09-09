@@ -58,6 +58,7 @@ export default SprintComponent = () => {
         // Call the fetchSprint function
         if (isFocused) {
             fetchSprint();
+            console.log(sprintDetail);
         }
     }, [isFocused]);
 
@@ -81,7 +82,10 @@ export default SprintComponent = () => {
                     <TaskSection title="Backlog" tasks={backlogTasks} />
                     <TaskSection title="Completed" tasks={completedTasks} />
 
-                    <TouchableOpacity style={styles.editSprintButton} onPress={closeSprint}>
+                    <TouchableOpacity
+                        style={styles.editSprintButton}
+                        onPress={() => navigation.navigate('Edit Sprint', { sprint: sprintDetail })}
+                    >
                         <Text style={styles.buttonText}>Edit Sprint</Text>
                     </TouchableOpacity>
 
@@ -136,7 +140,7 @@ const styles = StyleSheet.create({
         color: 'white',
         marginBottom: 16,
     },
-    
+
     createSprintButton: {
         backgroundColor: '#0052CC',
         padding: 16,
@@ -147,7 +151,7 @@ const styles = StyleSheet.create({
     editSprintButton: {
         backgroundColor: '#949396',
         padding: 16,
-        marginVertical:0,
+        marginVertical: 0,
         borderRadius: 40,
         marginTop: 100,
         alignItems: 'center',

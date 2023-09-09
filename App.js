@@ -11,6 +11,7 @@ import HomeScreenView from './screens/HomeScreenView';
 import CreateTaskScreenView from './screens/CreateTaskScreenView';
 import TaskDetailScreenView from './screens/TaskDetailScreenView';
 import CreateSprintScreenView from './screens/CreateSprintScreenView';
+import EditSprintScreenView from './screens/EditSprintScreenView';
 
 
 LogBox.ignoreLogs(['Sending `onAnimatedValueUpdate` with no listeners registered.']);
@@ -42,6 +43,15 @@ const App = () => {
             presentation: 'modal',
           }}
           component={CreateSprintScreenView}
+        />
+
+        <Stack.Screen
+          name="Edit Sprint"
+          options={{
+            headerShown: false,
+            presentation: 'modal',
+          }}
+          component={EditSprintScreenView}
         />
 
         <Stack.Screen

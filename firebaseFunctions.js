@@ -170,6 +170,27 @@ const firebaseCloseSprint = async (sprintId) => {
 };
 
 
+const firebaseEditSprint = async (sprintId, newSprintName, newSelectedTasks) => {
+  try {
+    // Define the path to the sprint document in the Firestore collection
+    const sprintRef = doc(firestore, 'sprints', sprintId);
+
+    // Update the sprint document with the new name and selected tasks
+    await updateDoc(sprintRef, {
+      sprintName: newSprintName,
+      tasks: newSelectedTasks,
+    });
+
+    // Sprint edited successfully
+    console.log('Sprint edited successfully');
+    return true;
+  } catch (error) {
+    console.error('Error editing sprint: ', error);
+    return false;
+  }
+};
+
+
 export {
   firebaseCreateTask,
   firebaseFetchTask,
@@ -178,5 +199,6 @@ export {
   firebaseCreateSprint,
   firebaseFetchActiveSprint,
   firebaseFetchSprintTasks,
-  firebaseCloseSprint
+  firebaseCloseSprint,
+  firebaseEditSprint
 };
