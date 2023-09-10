@@ -1,5 +1,20 @@
 import { auth, firestore } from './firebase'; // Import your Firebase instance
 import { collection, addDoc, query, where, getDocs, getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+
+
+const firebaseLogin = async (email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    console.log('Logged in with:', user.email);
+    return user; // Optionally, you can return the user object
+  } catch (error) {
+    console.error('Login error:', error.message);
+    throw error; // Re-throw the error for handling in the calling code
+  }
+};
+
 
 // Function to create a new task in Firebase
 const firebaseCreateTask = async (taskTitle, taskDescription, deadline, storyPoint) => {
@@ -221,6 +236,7 @@ const firebaseEditSprint = async (sprintId, newSprintName, newSelectedTasks) => 
 
 // Export all the Firebase-related functions
 export {
+  firebaseLogin,
   firebaseCreateTask,
   firebaseFetchTask,
   firebaseEditTask,

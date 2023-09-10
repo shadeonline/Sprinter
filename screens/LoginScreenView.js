@@ -4,6 +4,7 @@ import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, Vi
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase'
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
+import {firebaseLogin} from '../firebaseFunctions';
 
 const LoginScreenView = () => {
   const [email, setEmail] = useState('')
@@ -22,13 +23,13 @@ const LoginScreenView = () => {
 
   const handleLogin = async () => {
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-      console.log('Logged in with:', user.email);
+      await firebaseLogin(email, password);
+      // You can navigate to the Home screen or perform other actions upon successful login
+      navigation.replace('Home');
     } catch (error) {
       alert(error.message);
     }
-  }
+  };
 
 
 
