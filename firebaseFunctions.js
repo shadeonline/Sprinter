@@ -65,12 +65,37 @@ const firebaseEditTask = async (editedTask) => {
 
 
 const firebaseDeleteTask = async (taskId) => {
+  const userUid = auth.currentUser.uid;
   try {
     // Define the path to the task document in the Firestore collection
-    const taskRef = doc(firestore, 'tasks', taskId);
+    const taskDocumentRef = doc(firestore, 'tasks', taskId);
 
     // Delete the task document
-    await deleteDoc(taskRef);
+    await deleteDoc(taskDocumentRef);
+
+    // Query for active sprints associated with the user
+    const activeSprintsQuery = query(
+      collection(firestore, 'sprints'),
+      where('userUid', '==', userUid),
+      where('status', '==', 'Active')
+    );
+
+    const activeSprintsSnapshot = await getDocs(activeSprintsQuery);
+
+    if (activeSprintsSnapshot.size > 0) {
+      // If there are active sprints, loop through them to remove the task ID
+      activeSprintsSnapshot.forEach(async (sprintDoc) => {
+        const sprintData = sprintDoc.data();
+
+        if (sprintData.tasks && sprintData.tasks.includes(taskId)) {
+          const updatedTasks = sprintData.tasks.filter((id) => id !== taskId);
+
+          // Update the sprint document with the modified tasks list
+          const updatedSprintRef = doc(firestore, 'sprints', sprintDoc.id);
+          await updateDoc(updatedSprintRef, { tasks: updatedTasks });
+        }
+      });
+    }
 
     // Task deleted successfully
     console.log('Task deleted successfully');

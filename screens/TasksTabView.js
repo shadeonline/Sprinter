@@ -64,7 +64,6 @@ export default TasksComponent = () => {
     );
 };
 
-
 const styles = StyleSheet.create({
     background: {
         backgroundColor: '#4C4B63',
@@ -79,12 +78,14 @@ const styles = StyleSheet.create({
     emptyMessageText: {
         color: 'white',
         fontSize: 16,
+        textAlign: 'center',
     },
     createTaskButton: {
         backgroundColor: '#0052CC',
         padding: 16,
         borderRadius: 40,
         marginTop: 15,
+        alignSelf: 'center', // Center-align the button horizontally
     },
     createTaskButtonText: {
         color: 'white',

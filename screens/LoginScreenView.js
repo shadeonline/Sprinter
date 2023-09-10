@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase'
+import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 
 const LoginScreenView = () => {
   const [email, setEmail] = useState('')
@@ -33,7 +34,8 @@ const LoginScreenView = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
-
+      <FontAwesome5 name="running" size={100} color="white" style={styles.image} />
+      <Text style={styles.imageText}>Sprinter</Text>
       <View style={styles.inputContainer} >
         <TextInput
           style={styles.input}
@@ -76,14 +78,21 @@ export default LoginScreenView
 
 const styles = StyleSheet.create({
   image: {
-    height: '30%',
-    aspectRatio: 1 / 1
+    aspectRatio: 1 / 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageText: {
+    fontWeight: 'bold',
+    color: 'white',
+    marginBottom: 20,
+    fontSize:20,
   },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#4c4b63',
   },
   inputContainer: {
     width: '80%'

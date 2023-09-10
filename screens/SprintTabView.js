@@ -95,7 +95,7 @@ export default SprintComponent = () => {
                 </View>
             ) : (
                 // If no sprints exist, show the "Create new Sprint" button
-                <View style={styles.container}>
+                <View style={styles.emptyMessageContainer}>
                     <Text style={styles.text}>Looking empty! Create a new sprint to begin!</Text>
                     <TouchableOpacity style={styles.createSprintButton} onPress={() => navigation.navigate('New Sprint')}>
                         <Text style={styles.buttonText}>Create new Sprint</Text>
@@ -114,6 +114,11 @@ const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 16,
         paddingTop: 24,
+    },
+    emptyMessageContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     header: {
         fontSize: 24,
@@ -172,5 +177,6 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 15,
         padding: 15,
+        textAlign:'centre',
     },
 });

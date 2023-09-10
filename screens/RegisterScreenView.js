@@ -3,6 +3,8 @@ import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, Vi
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { collection, doc, setDoc, addDoc, getDocs, query, where } from "firebase/firestore";
 import { auth, firestore } from '../firebase';
+import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
+
 
 const RegisterScreenView = () => {
     const [email, setEmail] = useState('');
@@ -38,11 +40,12 @@ const RegisterScreenView = () => {
             console.error("Error creating profile:", error);
         }
     };
-    
+
 
     return (
         <KeyboardAvoidingView style={styles.container} behavior="padding">
-            {/* <Image source={require("../assets/Cardity2.png")} style={[styles.image,]} /> */}
+            <FontAwesome5 name="running" size={100} color="white" style={styles.image} />
+            <Text style={styles.imageText} >Sprinter</Text>
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.input}
@@ -84,14 +87,21 @@ export default RegisterScreenView;
 
 const styles = StyleSheet.create({
     image: {
-        height: '30%',
-        aspectRatio: 1 / 1
+        aspectRatio: 1 / 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
+    imageText: {
+        fontWeight: 'bold',
+        color: 'white',
+        marginBottom: 20,
+        fontSize:20,
+      },
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: '#4c4b63',
     },
     inputContainer: {
         width: '80%'
