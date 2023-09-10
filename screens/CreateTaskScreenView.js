@@ -52,7 +52,7 @@ export default function CreateTaskScreenView() {
   };
 
   return (
-    <ScrollView style={styles.background}>
+    <View style={styles.background}>
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         <View style={styles.formContainer}>
           <Text style={styles.fieldDescription}>Title</Text>
@@ -131,13 +131,14 @@ export default function CreateTaskScreenView() {
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   background: {
     backgroundColor: '#4c4b63',
+    flex: 1,
   },
   container: {
     flex: 1,

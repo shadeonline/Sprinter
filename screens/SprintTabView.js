@@ -177,6 +177,6 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 15,
         padding: 15,
-        textAlign:'centre',
+        textAlign:'center',
     },
 });
