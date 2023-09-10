@@ -37,6 +37,7 @@ const LoginScreenView = () => {
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <FontAwesome5 name="running" size={100} color="white" style={styles.image} />
       <Text style={styles.imageText}>Sprinter</Text>
+      <Text style={styles.subImageText}>Personal Agile Task Management Tool</Text>
       <View style={styles.inputContainer} >
         <TextInput
           style={styles.input}
@@ -86,8 +87,13 @@ const styles = StyleSheet.create({
   imageText: {
     fontWeight: 'bold',
     color: 'white',
-    marginBottom: 20,
     fontSize:20,
+  },
+  subImageText:{
+    fontWeight: 'bold',
+    color: 'white',
+    marginBottom: 20,
+    fontSize:13,
   },
   container: {
     flex: 1,
