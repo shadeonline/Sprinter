@@ -1,12 +1,12 @@
-import { auth, firestore } from './firebase'; // Update the path to your firebase.js file
-import { collection, addDoc, query, where, getDocs,getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { auth, firestore } from './firebase'; // Import your Firebase instance
+import { collection, addDoc, query, where, getDocs, getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 
-
+// Function to create a new task in Firebase
 const firebaseCreateTask = async (taskTitle, taskDescription, deadline, storyPoint) => {
   try {
-    // Create a task object
+    // Create a task object with user UID, task details, status, and timestamp
     const task = {
-      userUid: auth.currentUser.uid, // Assuming you have the user's UID
+      userUid: auth.currentUser.uid, // Current user's UID
       taskDescription,
       taskTitle,
       deadline,
@@ -18,7 +18,7 @@ const firebaseCreateTask = async (taskTitle, taskDescription, deadline, storyPoi
     // Add the task to the "tasks" collection in Firebase
     const docRef = await addDoc(collection(firestore, 'tasks'), task);
 
-    // Successfully added the task, you can navigate back or perform any other action
+    // Successfully added the task, return true
     console.log('Task added with ID: ', docRef.id);
     return true;
   } catch (error) {
@@ -27,6 +27,7 @@ const firebaseCreateTask = async (taskTitle, taskDescription, deadline, storyPoi
   }
 };
 
+// Function to fetch tasks for the current user from Firebase
 const firebaseFetchTask = async () => {
   const userUid = auth.currentUser.uid;
 
@@ -46,15 +47,16 @@ const firebaseFetchTask = async () => {
   }
 };
 
-
-
-
+// Function to edit an existing task in Firebase
 const firebaseEditTask = async (editedTask) => {
   try {
     // Define the path to the task document in the Firestore collection
     const taskRef = doc(firestore, 'tasks', editedTask.id);
+
+    // Update the task document with the edited task data
     await updateDoc(taskRef, editedTask);
-    // Task updated successfully
+
+    // Task updated successfully, return true
     console.log('Task updated successfully');
     return true;
   } catch (error) {
@@ -63,7 +65,7 @@ const firebaseEditTask = async (editedTask) => {
   }
 };
 
-
+// Function to delete a task from Firebase and remove it from active sprints
 const firebaseDeleteTask = async (taskId) => {
   const userUid = auth.currentUser.uid;
   try {
@@ -97,7 +99,7 @@ const firebaseDeleteTask = async (taskId) => {
       });
     }
 
-    // Task deleted successfully
+    // Task deleted successfully, return true
     console.log('Task deleted successfully');
     return true;
   } catch (error) {
@@ -106,12 +108,12 @@ const firebaseDeleteTask = async (taskId) => {
   }
 };
 
-
+// Function to create a new sprint in Firebase
 const firebaseCreateSprint = async (sprintName, selectedTasks) => {
   try {
-    // Create a sprint object
+    // Create a sprint object with user UID, sprint name, selected tasks, status, and timestamp
     const sprint = {
-      userUid: auth.currentUser.uid, // Assuming you have the user's UID
+      userUid: auth.currentUser.uid, // Current user's UID
       sprintName,
       tasks: selectedTasks,
       createdAt: new Date().toISOString(),
@@ -121,7 +123,7 @@ const firebaseCreateSprint = async (sprintName, selectedTasks) => {
     // Add the sprint to the "sprints" collection in Firebase
     const docRef = await addDoc(collection(firestore, 'sprints'), sprint);
 
-    // Successfully added the sprint, you can navigate back or perform any other action
+    // Successfully added the sprint, return true
     console.log('Sprint added with ID: ', docRef.id);
     return true;
   } catch (error) {
@@ -130,6 +132,7 @@ const firebaseCreateSprint = async (sprintName, selectedTasks) => {
   }
 };
 
+// Function to fetch the active sprint for the current user from Firebase
 const firebaseFetchActiveSprint = async () => {
   const userUid = auth.currentUser.uid;
 
@@ -137,7 +140,7 @@ const firebaseFetchActiveSprint = async () => {
   try {
     const querySnapshot = await getDocs(q);
     if (querySnapshot.size === 0) {
-      // No active sprint found
+      // No active sprint found, return null
       return null;
     }
 
@@ -152,6 +155,7 @@ const firebaseFetchActiveSprint = async () => {
   }
 };
 
+// Function to fetch tasks for a sprint from Firebase based on task IDs
 const firebaseFetchSprintTasks = async (taskIds) => {
   try {
     const tasks = [];
@@ -176,7 +180,7 @@ const firebaseFetchSprintTasks = async (taskIds) => {
   }
 };
 
-
+// Function to close an active sprint in Firebase
 const firebaseCloseSprint = async (sprintId) => {
   try {
     // Define the path to the sprint document in the Firestore collection
@@ -185,7 +189,7 @@ const firebaseCloseSprint = async (sprintId) => {
     // Update the status of the sprint to 'Inactive'
     await updateDoc(sprintRef, { status: 'Inactive' });
 
-    // Sprint closed successfully
+    // Sprint closed successfully, return true
     console.log('Sprint closed successfully');
     return true;
   } catch (error) {
@@ -194,7 +198,7 @@ const firebaseCloseSprint = async (sprintId) => {
   }
 };
 
-
+// Function to edit an existing sprint in Firebase
 const firebaseEditSprint = async (sprintId, newSprintName, newSelectedTasks) => {
   try {
     // Define the path to the sprint document in the Firestore collection
@@ -206,7 +210,7 @@ const firebaseEditSprint = async (sprintId, newSprintName, newSelectedTasks) => 
       tasks: newSelectedTasks,
     });
 
-    // Sprint edited successfully
+    // Sprint edited successfully, return true
     console.log('Sprint edited successfully');
     return true;
   } catch (error) {
@@ -215,7 +219,7 @@ const firebaseEditSprint = async (sprintId, newSprintName, newSelectedTasks) => 
   }
 };
 
-
+// Export all the Firebase-related functions
 export {
   firebaseCreateTask,
   firebaseFetchTask,
