@@ -32,6 +32,7 @@ const RegisterScreenView = () => {
             const profileData = {
                 email: email,
                 name: name,
+                new: true,
             };
             // Save the data to the profile document
             await setDoc(profileDocRef, profileData);

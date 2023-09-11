@@ -1,5 +1,5 @@
 import { auth, firestore } from './firebase'; // Import your Firebase instance
-import { collection, addDoc, query, where, getDocs, getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { collection, addDoc, query, where, getDocs, getDoc, doc, updateDoc, deleteDoc, setDoc} from 'firebase/firestore';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
 
@@ -14,6 +14,59 @@ const firebaseLogin = async (email, password) => {
     throw error; // Re-throw the error for handling in the calling code
   }
 };
+
+
+const firebaseCheckNewUser = async () => {
+  const userUid = auth.currentUser.uid;
+  const profileRef = doc(firestore, 'profiles', userUid);
+  try {
+    const docSnapshot = await getDoc(profileRef);
+
+    if (docSnapshot.exists()) {
+      const profileData = docSnapshot.data();
+      return profileData.new;
+    } else {
+      console.log('User profile does not exist.');
+      return false;
+    }
+  } catch (error) {
+    console.error('Error checking user profile:', error.message);
+    return false;
+  }
+};
+
+const firebaseCompleteTutorial = async () => {
+  const userUid = auth.currentUser.uid;
+  const profileRef = doc(firestore, 'profiles', userUid);
+
+  try {
+    const docSnapshot = await getDoc(profileRef);
+
+    if (docSnapshot.exists()) {
+      // Get the current profile data
+      const profileData = docSnapshot.data();
+
+      // Check if the tutorial is already marked as completed
+      if (profileData.new === false) {
+        console.log('Tutorial is already completed.');
+        return false;
+      }
+
+      // Update the profile to mark the tutorial as completed
+      await setDoc(profileRef, { ...profileData, new: false });
+
+      console.log('Tutorial completed.');
+      return true;
+    } else {
+      console.log('User profile does not exist.');
+      return false;
+    }
+  } catch (error) {
+    console.error('Error completing tutorial:', error.message);
+    return false;
+  }
+};
+
 
 
 // Function to create a new task in Firebase
@@ -236,6 +289,8 @@ const firebaseEditSprint = async (sprintId, newSprintName, newSelectedTasks) => 
 
 // Export all the Firebase-related functions
 export {
+  firebaseCheckNewUser,
+  firebaseCompleteTutorial,
   firebaseLogin,
   firebaseCreateTask,
   firebaseFetchTask,

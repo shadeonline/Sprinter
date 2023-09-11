@@ -12,6 +12,7 @@ import CreateTaskScreenView from './screens/CreateTaskScreenView';
 import TaskDetailScreenView from './screens/TaskDetailScreenView';
 import CreateSprintScreenView from './screens/CreateSprintScreenView';
 import EditSprintScreenView from './screens/EditSprintScreenView';
+import TutorialScreenView from './screens/TutorialScreenView';
 
 
 LogBox.ignoreLogs(['Sending `onAnimatedValueUpdate` with no listeners registered.']);
@@ -61,6 +62,15 @@ const App = () => {
             presentation: 'modal',
           }}
           component={TaskDetailScreenView}
+        />
+
+        <Stack.Screen
+          name="Tutorial"
+          options={{
+            headerShown: false,
+            presentation: 'modal',
+          }}
+          component={TutorialScreenView}
         />
 
       </Stack.Navigator>

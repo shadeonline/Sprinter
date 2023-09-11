@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -9,12 +9,29 @@ import SettingsComponent from './SettingsTabView';
 import SprintComponent from './SprintTabView';
 import TasksComponent from './TasksTabView';
 import CreateTaskButton from '../components/CreateTaskButton';
+import {firebaseCheckNewUser} from '../firebaseFunctions';
 
 const Tab = createBottomTabNavigator();
 
 const HomeScreenView = () => {
   const navigation = useNavigation(); // Get the navigation object
 
+  useEffect(() => {
+    const checkNewUser = async () => {
+      try {
+        const isNewUser = await firebaseCheckNewUser();
+        if (isNewUser) {
+          navigation.navigate("Tutorial");
+        }
+      } catch (error) {
+        console.error('Error checking new user:', error.message);
+      }
+    };
+  
+    checkNewUser();
+  }, []);
+  
+  
   useFocusEffect(() => {
     navigation.setOptions({
       headerRight: () => <CreateTaskButton/>,

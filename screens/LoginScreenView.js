@@ -90,7 +90,6 @@ const styles = StyleSheet.create({
     fontSize:20,
   },
   subImageText:{
-    fontWeight: 'bold',
     color: 'white',
     marginBottom: 20,
     fontSize:13,
