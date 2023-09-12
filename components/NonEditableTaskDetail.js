@@ -9,7 +9,22 @@ const NonEditableTaskDetail = ({ task, setIsEditing, handleDeleteTask }) => {
     const navigation = useNavigation();
 
     const [editedTask, setEditedTask] = useState(task);
+    // const [buttonBackgroundColor, setButtonBackgroundColor] = useState('#999999');
 
+
+    const [buttonBackgroundColor, setButtonBackgroundColor] = useState(() => {
+        // Set the initial button background color based on task.status
+        switch (task.status) {
+            case 'Backlog':
+                return '#999999'; // Grey for Backlog
+            case 'In Progress':
+                return '#0782F9'; // Blue for In Progress
+            case 'Completed':
+                return '#14A44D'; // Green for Completed
+            default:
+                return '#999999'; // Default to grey for unknown status
+        }
+    });
 
     const handleStatusChange = (selectedStatus) => {
         // Update the editedTask state with the new status
@@ -17,6 +32,21 @@ const NonEditableTaskDetail = ({ task, setIsEditing, handleDeleteTask }) => {
             ...prevEditedTask,
             status: selectedStatus,
         }));
+
+        // Set the button background color based on the selected status
+        switch (selectedStatus) {
+            case 'Backlog':
+                setButtonBackgroundColor('#999999'); // Grey for Backlog
+                break;
+            case 'In Progress':
+                setButtonBackgroundColor('#0782F9'); // Blue for In Progress
+                break;
+            case 'Completed':
+                setButtonBackgroundColor('#14A44D'); // Green for Completed
+                break;
+            default:
+                setButtonBackgroundColor('#999999'); // Default to grey for unknown status
+        }
     }
 
     useEffect(() => {
@@ -57,13 +87,13 @@ const NonEditableTaskDetail = ({ task, setIsEditing, handleDeleteTask }) => {
 
             <SelectDropdown
                 defaultValue={task.status}
-                data={["-", "In Progress", "Completed"]}
+                data={["Backlog", "In Progress", "Completed"]}
                 onSelect={(selectedStatus) => {
                     handleStatusChange(selectedStatus)
                 }}
-                buttonStyle = {styles.selectButton}
-                buttonTextStyle ={styles.selectButtonText}
-                
+                buttonStyle={{ ...styles.selectButton, backgroundColor: buttonBackgroundColor }}
+                buttonTextStyle={styles.selectButtonText}
+
             />
             <Text style={styles.modalLabel}>Storypoint:</Text>
             <Text style={styles.modalText}>{task.storyPoint}</Text>
@@ -96,7 +126,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         marginBottom: 8,
-        color: '#949396', // Jira-like label color
+        color: '#949396',
     },
     modalText: {
         fontSize: 16,
@@ -105,7 +135,7 @@ const styles = StyleSheet.create({
     },
     iconContainer: {
         flexDirection: 'row',
-        justifyContent: 'flex-end', // Align icons to the right
+        justifyContent: 'flex-end',
         marginBottom: 16,
     },
     icon: {
@@ -126,7 +156,6 @@ const styles = StyleSheet.create({
     selectButton: {
         padding: 12,
         alignItems: 'center',
-        backgroundColor: '#0052CC',
         marginBottom: 16,
         width: '40%',
         height: '10%'

@@ -17,7 +17,7 @@ export default TasksComponent = () => {
         const taskList = await firebaseFetchTask();
         setTasks(taskList);
 
-        const backlog = taskList.filter((task) => task.status === '-');
+        const backlog = taskList.filter((task) => task.status === 'Backlog');
         const inProgress = taskList.filter((task) => task.status === 'In Progress');
         const completed = taskList.filter((task) => task.status === 'Completed');
 

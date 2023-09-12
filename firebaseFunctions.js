@@ -79,7 +79,7 @@ const firebaseCreateTask = async (taskTitle, taskDescription, deadline, storyPoi
       taskTitle,
       deadline,
       storyPoint,
-      status: '-',
+      status: 'Backlog',
       createdAt: new Date().toISOString(),
     };
 

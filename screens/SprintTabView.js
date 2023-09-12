@@ -25,7 +25,7 @@ export default SprintComponent = () => {
             if (activeSprint) {
                 const sprintTaskIds = activeSprint.tasks || []; // Assuming tasks property exists
                 const taskList = await firebaseFetchSprintTasks(sprintTaskIds);
-                const backlog = taskList.filter((task) => task.status === '-');
+                const backlog = taskList.filter((task) => task.status === 'Backlog');
                 const inProgress = taskList.filter((task) => task.status === 'In Progress');
                 const completetd = taskList.filter((task) => task.status === 'Completed');
                 setBacklogTasks(backlog);
