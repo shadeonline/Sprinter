@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SprintChart matches snapshot 1`] = `
+<View>
+  <View
+    absolute={true}
+    accessor="population"
+    backgroundColor="transparent"
+    chartConfig={
+      {
+        "backgroundGradientFrom": "#4C4B63",
+        "backgroundGradientTo": "#4C4B63",
+        "color": [Function],
+      }
+    }
+    data={
+      [
+        {
+          "color": "#c3c3c3",
+          "legendFontColor": "white",
+          "legendFontSize": 15,
+          "name": "Backlog",
+          "population": 0,
+        },
+        {
+          "color": "#5386e4",
+          "legendFontColor": "white",
+          "legendFontSize": 15,
+          "name": "In Progress",
+          "population": 0,
+        },
+        {
+          "color": "green",
+          "legendFontColor": "white",
+          "legendFontSize": 15,
+          "name": "Completed",
+          "population": 0,
+        },
+      ]
+    }
+    height={220}
+    paddingLeft="15"
+    width={300}
+  />
+  <Text
+    style={
+      {
+        "color": "white",
+        "marginTop": 10,
+        "textAlign": "center",
+      }
+    }
+  >
+    Total Tasks: 
+    10
+  </Text>
+</View>
+`;

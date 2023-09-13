@@ -1,0 +1,287 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NonEditableTaskDetail matches snapshot 1`] = `
+<View
+  style={
+    {
+      "backgroundColor": "white",
+      "padding": 16,
+    }
+  }
+>
+  <View
+    style={
+      {
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+        "marginBottom": 16,
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+    </View>
+  </View>
+  <Text
+    style={
+      {
+        "color": "#949396",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "marginBottom": 8,
+      }
+    }
+  >
+    Status:
+  </Text>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "#999999",
+        "flexDirection": "row-reverse",
+        "height": "10%",
+        "justifyContent": "space-between",
+        "marginBottom": 16,
+        "opacity": 1,
+        "overflow": "hidden",
+        "padding": 12,
+        "paddingHorizontal": 8,
+        "width": "40%",
+      }
+    }
+  >
+    <Text
+      allowFontScaling={false}
+      numberOfLines={1}
+      style={
+        {
+          "color": "white",
+          "flex": 1,
+          "fontSize": 13,
+          "fontWeight": "bold",
+          "marginHorizontal": 8,
+          "textAlign": "center",
+        }
+      }
+    >
+      Select an option.
+    </Text>
+  </View>
+  <Text
+    style={
+      {
+        "color": "#949396",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "marginBottom": 8,
+      }
+    }
+  >
+    Storypoint:
+  </Text>
+  <Text
+    style={
+      {
+        "color": "black",
+        "fontSize": 16,
+        "marginBottom": 16,
+      }
+    }
+  >
+    3
+  </Text>
+  <Text
+    style={
+      {
+        "color": "#949396",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "marginBottom": 8,
+      }
+    }
+  >
+    Description:
+  </Text>
+  <Text
+    style={
+      {
+        "color": "black",
+        "fontSize": 16,
+        "marginBottom": 16,
+      }
+    }
+  >
+    This is a sample task description.
+  </Text>
+  <Text
+    style={
+      {
+        "color": "#949396",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "marginBottom": 8,
+      }
+    }
+  >
+    Deadline:
+  </Text>
+  <Text
+    style={
+      {
+        "color": "black",
+        "fontSize": 16,
+        "marginBottom": 16,
+      }
+    }
+  >
+    30/09/23
+  </Text>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "grey",
+        "borderRadius": 4,
+        "marginTop": 10,
+        "opacity": 1,
+        "padding": 12,
+      }
+    }
+  >
+    <Text
+      style={
+        {
+          "color": "white",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Back
+    </Text>
+  </View>
+</View>
+`;

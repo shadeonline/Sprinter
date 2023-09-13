@@ -1,0 +1,314 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditableTaskDetail matches snapshot 1`] = `
+<View
+  style={
+    {
+      "width": "100%",
+    }
+  }
+>
+  <Text
+    style={
+      {
+        "color": "gray",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "marginBottom": 8,
+        "marginTop": 10,
+      }
+    }
+  >
+    Title:
+  </Text>
+  <TextInput
+    onChangeText={[Function]}
+    style={
+      {
+        "borderColor": "#E1E3E8",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "color": "gray",
+        "fontSize": 14,
+        "marginBottom": 8,
+        "padding": 8,
+        "width": "100%",
+      }
+    }
+    value="Edited Task"
+  />
+  <Text
+    style={
+      {
+        "color": "gray",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "marginBottom": 8,
+        "marginTop": 10,
+      }
+    }
+  >
+    Storypoint:
+  </Text>
+  <TextInput
+    onChangeText={[Function]}
+    style={
+      {
+        "borderColor": "#E1E3E8",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "color": "gray",
+        "fontSize": 14,
+        "marginBottom": 8,
+        "padding": 8,
+        "width": "100%",
+      }
+    }
+    value="5"
+  />
+  <Text
+    style={
+      {
+        "color": "gray",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "marginBottom": 8,
+        "marginTop": 10,
+      }
+    }
+  >
+    Description:
+  </Text>
+  <TextInput
+    multiline={true}
+    numberOfLines={4}
+    onChangeText={[Function]}
+    style={
+      [
+        {
+          "borderColor": "#E1E3E8",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "color": "gray",
+          "fontSize": 14,
+          "marginBottom": 8,
+          "padding": 8,
+          "width": "100%",
+        },
+        {
+          "height": 100,
+          "textAlignVertical": "top",
+        },
+      ]
+    }
+    value="This is the edited task description."
+  />
+  <Text
+    style={
+      {
+        "color": "gray",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "marginBottom": 8,
+        "marginTop": 10,
+      }
+    }
+  >
+    Deadline:
+  </Text>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+      }
+    }
+  >
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="dd"
+      style={
+        {
+          "borderColor": "#E1E3E8",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "color": "gray",
+          "flex": 1,
+          "fontSize": 14,
+          "marginBottom": 8,
+          "padding": 8,
+        }
+      }
+      value="15"
+    />
+    <Text
+      style={
+        {
+          "color": "gray",
+          "fontSize": 14,
+          "marginHorizontal": 4,
+        }
+      }
+    >
+      /
+    </Text>
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="mm"
+      style={
+        {
+          "borderColor": "#E1E3E8",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "color": "gray",
+          "flex": 1,
+          "fontSize": 14,
+          "marginBottom": 8,
+          "padding": 8,
+        }
+      }
+      value="10"
+    />
+    <Text
+      style={
+        {
+          "color": "gray",
+          "fontSize": 14,
+          "marginHorizontal": 4,
+        }
+      }
+    >
+      /
+    </Text>
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="yy"
+      style={
+        {
+          "borderColor": "#E1E3E8",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "color": "gray",
+          "flex": 1,
+          "fontSize": 14,
+          "marginBottom": 8,
+          "padding": 8,
+        }
+      }
+      value="23"
+    />
+  </View>
+  <View
+    style={
+      {
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "marginTop": 16,
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#DD2C00",
+          "borderRadius": 4,
+          "flex": 1,
+          "margin": 5,
+          "opacity": 1,
+          "padding": 10,
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "color": "white",
+            "fontWeight": "bold",
+            "textAlign": "center",
+          }
+        }
+      >
+        Cancel
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "green",
+          "borderRadius": 4,
+          "flex": 1,
+          "margin": 5,
+          "opacity": 1,
+          "padding": 10,
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "color": "white",
+            "fontWeight": "bold",
+            "textAlign": "center",
+          }
+        }
+      >
+        Save Changes
+      </Text>
+    </View>
+  </View>
+</View>
+`;
