@@ -3,4 +3,5 @@
     - `npm run android`
     - `npm run ios`
     - `npm run web`
-3. Feel free to create a new account on the application with arbitrary email address and password. Or you can use the following credentials: user: test@test.com, pw: 111111
+3. Feel free to create a new account on the application with arbitrary email address and password. Or you can use the following credentials: 
+```user: test@test.com, pw: 111111```
