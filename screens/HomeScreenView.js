@@ -22,12 +22,12 @@ const HomeScreenView = () => {
         const isNewUser = await firebaseCheckNewUser();
         if (isNewUser) {
           navigation.navigate("Tutorial");
+          return
         }
       } catch (error) {
         console.error('Error checking new user:', error.message);
       }
     };
-  
     checkNewUser();
   }, []);
   

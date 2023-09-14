@@ -7,8 +7,8 @@ const TutorialScreenView = () => {
   const navigation = useNavigation(); // Get the navigation object
 
   const handleCompleteTutorial = async () => {
-    navigation.goBack();
     const tutorialCompleted = await firebaseCompleteTutorial();
+    navigation.goBack();
   };
 
   return (
