@@ -52,8 +52,8 @@ export default function CreateTaskScreenView() {
   };
 
   return (
-    <View style={styles.background}>
-      <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <ScrollView style={styles.background}>
+      <View style={styles.container}>
         <View style={styles.formContainer}>
           <Text style={styles.fieldDescription}>Title</Text>
           <TextInput
@@ -130,8 +130,8 @@ export default function CreateTaskScreenView() {
             <Text style={styles.buttonText}>Cancel </Text>
           </TouchableOpacity>
         </View>
-      </KeyboardAvoidingView>
-    </View>
+      </View>
+    </ScrollView>
   );
 }
 
